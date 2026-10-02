@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>После 45 — не на паузе</title>
+<meta name="description" content="Канал Тани о здоровье и красоте после 45. Оставь заявку и получи чек-лист «20 вопросов врачу после 45».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;800&display=swap">
+<style>
+  /* Layout: open, airy offer on warm paper; the form sits on a berry-tinted
+     band as the one framed object on the page. */
+  :root {
+    --bg: #faf6f1;
+    --surface: #ffffff;
+    --tint: #f4e9e7;
+    --ink: #2a2320;
+    --muted: #6b5f58;
+    --accent: #9b2f52;
+    --accent-text: #9b2f52;
+    --on-accent: #ffffff;
+    --line: rgba(42, 35, 32, 0.14);
+    --danger: #a3341f;
+
+    --font: 'Geologica', 'Golos Text', 'PT Sans', Arial, sans-serif;
+
+    --fs-h1: clamp(2.5rem, 8vw, 4.25rem);
+    --fs-h2: clamp(1.75rem, 4.5vw, 2.5rem);
+    --fs-sub: 1.375rem;
+    --fs-body: 1.125rem;
+    --fs-small: 1rem;
+
+    --gutter: max(20px, env(safe-area-inset-left, 0px));
+    --radius: 20px;
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1617;
+      --surface: #241e1f;
+      --tint: #2b2023;
+      --ink: #f3ece6;
+      --muted: #c2b5ad;
+      --accent: #b8406a;
+      --accent-text: #e88fab;
+      --line: rgba(243, 236, 230, 0.14);
+      --danger: #f08b73;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  h1, h2 { margin: 0; text-wrap: balance; font-weight: 800; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  :focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.2) blur(10px);
+    -webkit-backdrop-filter: saturate(1.2) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 64px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex: none;
+  }
+  .header-link {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--accent-text);
+    text-decoration: none;
+    padding: 0.6rem 0.2rem;
+  }
+  .header-link:hover { text-decoration: underline; }
+
+  /* ---------- offer ---------- */
+
+  .offer {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3rem, 7vw, 5rem);
+  }
+  .offer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 40rem;
+  }
+  .eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 { font-size: var(--fs-h1); line-height: 1.04; }
+  h1 .accent { color: var(--accent-text); display: block; }
+  .sub { font-size: var(--fs-sub); font-weight: 600; }
+  .lead { color: var(--muted); max-width: 34rem; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding-inline: 1.75rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+    width: 100%;
+  }
+  .btn:hover { filter: brightness(1.1); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.6; cursor: progress; }
+  .offer-text .btn { margin-top: 0.5rem; }
+  @media (min-width: 600px) { .offer-text .btn { width: auto; align-self: flex-start; } }
+
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  @media (min-width: 820px) {
+    .points { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  }
+  .points li { display: flex; flex-direction: column; gap: 0.35rem; }
+  .point-title { font-weight: 800; font-size: 1.25rem; }
+  .points p { color: var(--muted); }
+
+  .about {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    max-width: 40rem;
+  }
+  .about .brand-mark { width: 52px; height: 52px; font-size: 1.4rem; }
+
+  /* ---------- form ---------- */
+
+  .form-band {
+    background: var(--tint);
+    padding-block: clamp(3rem, 8vw, 6rem);
+    scroll-margin-top: 64px;
+  }
+  .form-grid {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .form-grid { grid-template-columns: 0.9fr 1.1fr; gap: 4rem; }
+  }
+  .form-intro { display: flex; flex-direction: column; gap: 1rem; max-width: 30rem; }
+  .form-intro h2 { font-size: var(--fs-h2); line-height: 1.1; }
+  .form-intro p { color: var(--muted); }
+
+  .lead-form {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    box-shadow: 0 24px 48px -32px rgba(42, 35, 32, 0.35);
+  }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label { font-weight: 600; font-size: var(--fs-small); }
+  .field .hint { font-weight: 400; color: var(--muted); }
+  .field input,
+  .field textarea {
+    font: inherit;
+    font-size: 1.125rem;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    min-height: 52px;
+    width: 100%;
+  }
+  .field textarea { min-height: 120px; resize: vertical; }
+  .field input:focus,
+  .field textarea:focus { outline: none; border-color: var(--accent-text); }
+  .field[data-invalid] input,
+  .field[data-invalid] textarea { border-color: var(--danger); }
+  .field-error { color: var(--danger); font-size: var(--fs-small); min-height: 0; }
+  .field-error:empty { display: none; }
+
+  .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+  .consent {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-size: var(--fs-small);
+    color: var(--muted);
+  }
+  .consent input { width: 22px; height: 22px; margin: 0.15rem 0 0; flex: none; accent-color: var(--accent); }
+  .consent a { color: var(--accent-text); }
+
+  .form-status { font-size: var(--fs-small); font-weight: 500; }
+  .form-status:empty { display: none; }
+  .form-status[data-state="ok"] { color: var(--accent-text); }
+  .form-status[data-state="error"] { color: var(--danger); }
+
+  /* ---------- footer ---------- */
+
+  .site-footer {
+    padding-block: 2.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+    color: var(--muted);
+    font-size: var(--fs-small);
+  }
+  .footer-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .footer-links a { text-decoration: underline; text-underline-offset: 3px; }
+  .placeholder { font-style: italic; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">Т</span><span>после 45</span></a>
+    <a class="header-link" href="#form">Оставить заявку</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap offer">
+    <div class="offer-text">
+      <p class="eyebrow">Канал Тани о здоровье и красоте</p>
+      <h1>После 45 — <span class="accent">не на паузе</span></h1>
+      <p class="sub">Как оставаться красивой и здоровой</p>
+      <p class="lead">Сон хуже, кожа суше, к вечеру нет сил — знакомо? Разбираю, что за этим стоит, — без страшилок и чудо-средств.</p>
+      <a class="btn" href="#form">Получить чек-лист</a>
+    </div>
+
+    <ul class="points">
+      <li><span class="point-title">Чек-лист</span><p>20 вопросов гинекологу, эндокринологу и дерматологу. Распечатай и возьми на прием.</p></li>
+      <li><span class="point-title">Канал</span><p>Кожа, сон, вес и энергия после 45. В каждом посте — ссылка на исследование.</p></li>
+      <li><span class="point-title">Опыт</span><p>Что пробую на себе и что замечаю. Честно — даже когда не сработало.</p></li>
+    </ul>
+
+    <div class="about">
+      <span class="brand-mark" aria-hidden="true">Т</span>
+      <p>Я Таня, мне 45, и я не врач. Читаю исследования, слушаю врачей, проверяю на себе</p>
+    </div>
+  </section>
+
+  <section class="form-band" id="form">
+    <div class="wrap form-grid">
+      <div class="form-intro">
+        <h2>Оставь заявку</h2>
+        <p>Пришлю чек-лист «20 вопросов врачу после 45» и ссылку на канал. Бесплатно.</p>
+      </div>
+
+      <form class="lead-form" id="lead-form" novalidate>
+        <div class="field" id="field-name">
+          <label for="lead-name">Имя</label>
+          <input id="lead-name" name="name" type="text" autocomplete="given-name" maxlength="100" required>
+          <p class="field-error" id="error-name"></p>
+        </div>
+
+        <div class="field" id="field-contact">
+          <label for="lead-contact">Telegram или телефон</label>
+          <input id="lead-contact" name="contact" type="text" autocomplete="tel" maxlength="100" placeholder="@username или +7…" required>
+          <p class="field-error" id="error-contact"></p>
+        </div>
+
+        <div class="field" id="field-message">
+          <label for="lead-message">Сообщение <span class="hint">— по желанию</span></label>
+          <textarea id="lead-message" name="message" maxlength="1000" placeholder="Вопрос или пожелание"></textarea>
+        </div>
+
+        <div class="trap" aria-hidden="true">
+          <label for="lead-website">Не заполняйте это поле</label>
+          <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="field" id="field-consent">
+          <div class="consent">
+            <input id="lead-consent" name="consent" type="checkbox" required>
+            <label for="lead-consent">Соглашаюсь на обработку персональных данных по <a href="#privacy">политике конфиденциальности</a></label>
+          </div>
+          <p class="field-error" id="error-consent"></p>
+        </div>
+
+        <button class="btn" type="submit" id="lead-submit">Отправить заявку</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p>Автор не врач. Материалы носят информационный характер и не заменяют консультацию специалиста.</p>
+    <nav class="footer-links" aria-label="Ссылки">
+      <a href="#privacy" id="privacy">Политика конфиденциальности</a>
+      <a href="#" class="placeholder">Контакт для партнеров</a>
+      <a href="#" class="placeholder">[резервная площадка, например Max или VK]</a>
+    </nav>
+    <p>© <span id="year">2026</span> После 45</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function () {
+    var form = document.getElementById('lead-form');
+    var submit = document.getElementById('lead-submit');
+    var status = document.getElementById('form-status');
+    var inputs = {
+      name: document.getElementById('lead-name'),
+      contact: document.getElementById('lead-contact'),
+      message: document.getElementById('lead-message'),
+      website: document.getElementById('lead-website'),
+      consent: document.getElementById('lead-consent')
+    };
+    var params = new URLSearchParams(location.search);
+    var source = params.get('utm_source') || params.get('utm_campaign') || '';
+
+    function setStatus(text, state) {
+      status.textContent = text;
+      if (state) status.dataset.state = state; else delete status.dataset.state;
+    }
+
+    function setError(key, text) {
+      var field = document.getElementById('field-' + key);
+      var error = document.getElementById('error-' + key);
+      if (text) field.setAttribute('data-invalid', ''); else field.removeAttribute('data-invalid');
+      if (error) error.textContent = text || '';
+    }
+
+    function validate() {
+      var ok = true;
+      var name = inputs.name.value.trim();
+      var contact = inputs.contact.value.trim();
+      setError('name', name ? '' : 'Напиши, как к тебе обращаться.');
+      setError('contact', contact.length >= 3 ? '' : 'Оставь Telegram или телефон, чтобы я могла ответить.');
+      setError('consent', inputs.consent.checked ? '' : 'Без согласия я не могу принять заявку.');
+      if (!name) ok = false;
+      if (contact.length < 3) ok = false;
+      if (!inputs.consent.checked) ok = false;
+      return ok;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      setStatus('');
+      if (!validate()) {
+        var firstInvalid = form.querySelector('[data-invalid] input, [data-invalid] textarea');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+      if (location.protocol === 'file:') {
+        setStatus('Заявки отправляются, только когда лендинг открыт через «Запустить лендинг».', 'error');
+        return;
+      }
+
+      submit.disabled = true;
+      setStatus('Отправляем…');
+
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: inputs.name.value.trim(),
+          contact: inputs.contact.value.trim(),
+          message: inputs.message.value.trim(),
+          website: inputs.website.value,
+          consent: inputs.consent.checked,
+          source: source
+        })
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok || !body.ok) throw new Error(body.error || 'Не получилось отправить заявку. Попробуй еще раз.');
+          });
+        })
+        .then(function () {
+          form.reset();
+          setStatus('Заявка отправлена. Чек-лист пришлю в указанный контакт.', 'ok');
+        })
+        .catch(function (err) {
+          var text = err instanceof TypeError
+            ? 'Нет связи с сервером. Проверь интернет и попробуй еще раз.'
+            : err.message;
+          setStatus(text, 'error');
+        })
+        .then(function () { submit.disabled = false; });
+    });
+  })();
+</script>
+</body>
+</html>
