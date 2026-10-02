@@ -74,9 +74,11 @@ function note(text) {
 
 // Until a chat id is known, watch the bot's inbox: the first person who
 // writes to the bot (the owner) becomes the chat that receives leads.
+let discovering = false;
 async function discoverChatId() {
   const { token, chatId } = config();
-  if (!token || chatId) return;
+  if (!token || chatId || discovering) return;
+  discovering = true;
   try {
     const updates = await telegram('getUpdates', token, { timeout: 0 });
     const chat = updates
@@ -97,6 +99,8 @@ async function discoverChatId() {
     note(err.status === 401 || err.status === 404
       ? 'Telegram не принял ключ бота. Проверь TELEGRAM_BOT_TOKEN в файле .env.'
       : `Не получилось связаться с Telegram: ${err.message}`);
+  } finally {
+    discovering = false;
   }
 }
 
