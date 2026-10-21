@@ -1,0 +1,12 @@
+{
+  "name": "posle45-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Лендинг «После 45» с формой заявки, которая отправляет заявки в Telegram",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

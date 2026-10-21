@@ -10,6 +10,9 @@ const INDEX_PATH = path.join(ROOT, 'index.html');
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
 const TELEGRAM_API = process.env.TELEGRAM_API_BASE || 'https://api.telegram.org';
+// Behind a hosting proxy every request comes from the proxy's address;
+// the visitor's own address is in X-Forwarded-For.
+const TRUST_PROXY = process.env.TRUST_PROXY === '1';
 
 const MAX_BODY_BYTES = 16 * 1024;
 const RATE_LIMIT = 5;
@@ -104,6 +107,11 @@ async function discoverChatId() {
   }
 }
 
+function clientIp(req) {
+  const forwarded = TRUST_PROXY ? String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() : '';
+  return forwarded || req.socket.remoteAddress || '';
+}
+
 const hits = new Map();
 function rateLimited(ip) {
   const now = Date.now();
@@ -112,6 +120,12 @@ function rateLimited(ip) {
   hits.set(ip, recent);
   return recent.length > RATE_LIMIT;
 }
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, times] of hits) {
+    if (now - times[times.length - 1] >= RATE_WINDOW_MS) hits.delete(ip);
+  }
+}, RATE_WINDOW_MS).unref();
 
 function clean(value, max) {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, max) : '';
@@ -145,7 +159,7 @@ function readBody(req) {
 }
 
 async function handleLead(req, res) {
-  if (rateLimited(req.socket.remoteAddress || '')) {
+  if (rateLimited(clientIp(req))) {
     return send(res, 429, { ok: false, error: 'Слишком много заявок подряд. Попробуй через несколько минут.' });
   }
 
